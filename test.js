@@ -171,10 +171,15 @@ describe("DatabaseStream", function () {
         assert.throws(function () { cursor.write({}) });
     });
 
-    it("Requires implementation of _load", function () {
+    it("Requires implementation of _load", function (done) {
         const cursor = new dbstream.Cursor();
-        cursor.find({});
-        assert.throws(function () { cursor.read() });
+
+        cursor.on('error', error => {
+            assert.equal(error.message, "_load is not implemented");
+            done();
+        });
+
+        cursor.find({}).read();
     });
 
     it("Requires implementation of _remove", function () {
