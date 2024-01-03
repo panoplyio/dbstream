@@ -168,7 +168,11 @@ describe("DatabaseStream", function () {
 
     it("Requires implementation of _save", function () {
         const cursor = new dbstream.Cursor();
-        assert.throws(function () { cursor.write({}) });
+
+        assert.throws(
+            () => cursor.write({}),
+            /_save is not implemented/
+        );
     });
 
     it("Requires implementation of _load", function (done) {
@@ -184,7 +188,11 @@ describe("DatabaseStream", function () {
 
     it("Requires implementation of _remove", function () {
         const cursor = new dbstream.Cursor();
-        assert.throws(function () { cursor.remove({}) });
+
+        assert.throws(
+            () => cursor.remove({}),
+            /_remove is not implemented/
+        );
     });
 
 });
