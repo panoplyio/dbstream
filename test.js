@@ -25,7 +25,7 @@ module.exports = function (connection) {
             { name: "Bob", age: 17 },
             { name: "Charlie", age: 21 },
             { name: "David", age: 10 }
-        ].forEach(cursor.write, cursor);
+        ].forEach(o => cursor.write(o));
 
         cursor.on("finish", function () {
             new connection.Cursor()
